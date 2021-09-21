@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uee/constants.dart';
+import 'package:uee/tableOrdering.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({Key? key}) : super(key: key);
@@ -111,60 +112,68 @@ class _ListDetailsState extends State<ListDetails> {
               ),
             ),
           ),
-          Container(
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TableOrderingUI()),
+              );
+            },
             child: Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,
-              ),
-              height: MediaQuery.of(context).size.height / 7,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 7.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kOrange,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width / 50),
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width / 10,
+                  right: MediaQuery.of(context).size.width / 10,
+                ),
+                height: MediaQuery.of(context).size.height / 7,
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      height: MediaQuery.of(context).size.height / 7.5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: kDarkGrey,
+                        color: kOrange,
                       ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 15),
-                            child: Image.asset('asset/images/cate2.png'),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Table Ordering',
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: kWhite,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width / 50),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: kDarkGrey,
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width / 15),
+                              child: Image.asset('asset/images/cate2.png'),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width / 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Table Ordering',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: kWhite,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
