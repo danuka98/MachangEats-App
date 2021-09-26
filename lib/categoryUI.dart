@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uee/constants.dart';
+import 'package:uee/pubLocator.dart';
+import 'package:uee/restaurants.dart';
 import 'package:uee/tableOrdering.dart';
 
 class CategoryList extends StatelessWidget {
@@ -49,75 +51,55 @@ class ListDetails extends StatefulWidget {
 }
 
 class _ListDetailsState extends State<ListDetails> {
+
+  List categoryImage = [
+    "asset/images/cate1.png",
+    "asset/images/cate2.png",
+    "asset/images/cate3.jpg",
+    "asset/images/cate4.jpg",
+    "asset/images/cate5.jpg",
+    "asset/images/cate6.jpg",
+  ];
+  List categoryDetails = [
+    "Food & Delivery",
+    "Table Ordering",
+    "Events",
+    "Promotions",
+    "Pub Locator",
+    "Premium"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3.8),
-      child: ListView(
-        children: [
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,
-              ),
-              height: MediaQuery.of(context).size.height / 7,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 7.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kOrange,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width / 50),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: kDarkGrey,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 15),
-                            child: Image.asset('asset/images/cate1.png'),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Food & Delivery',
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: kWhite,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          GestureDetector(
+      child: ListView.builder(
+        itemCount: categoryDetails.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
             onTap: (){
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TableOrderingUI()),
-              );
+              switch(index){
+                case 0:{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RestaurantsHome()),
+                  );
+                }
+                break;
+                case 1:{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TableOrderingUI()),
+                  );
+                }
+                break;
+                case 4:{
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PubLocator()),
+                  );
+                }
+              }
             },
             child: Container(
               child: Container(
@@ -143,29 +125,35 @@ class _ListDetailsState extends State<ListDetails> {
                         ),
                         child: Row(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width / 15),
-                              child: Image.asset('asset/images/cate2.png'),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width / 15),
+                                child: Image.asset(categoryImage[index]),
+                              ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width / 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Table Ordering',
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: kWhite,
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width / 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      categoryDetails[index],
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: kWhite,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -176,223 +164,8 @@ class _ListDetailsState extends State<ListDetails> {
                 ),
               ),
             ),
-          ),
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,
-              ),
-              height: MediaQuery.of(context).size.height / 7,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 7.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kOrange,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width / 50),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: kDarkGrey,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 15),
-                            child: Image.asset('asset/images/cate3.jpg'),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 5.5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Events',
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: kWhite,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,
-              ),
-              height: MediaQuery.of(context).size.height / 7,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 7.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kOrange,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width / 50),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: kDarkGrey,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 15),
-                            child: Image.asset('asset/images/cate4.jpg'),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 7.5),
-                            child: Text(
-                              'Promotions',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: kWhite,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,
-              ),
-              height: MediaQuery.of(context).size.height / 7,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 7.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kOrange,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width / 50),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: kDarkGrey,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 7),
-                            child: Image.asset('asset/images/cate5.jpg',
-                                width: MediaQuery.of(context).size.width / 12,height: MediaQuery.of(context).size.height / 8),
-
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 5),
-                            child: Text(
-                              'Pub Locator',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: kWhite,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,
-              ),
-              height: MediaQuery.of(context).size.height / 7,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height / 7.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: kOrange,
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width / 50),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: kDarkGrey,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 70),
-                            child: Image.asset('asset/images/cate6.jpg'),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 10),
-                            child: Text(
-                              'Premium',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: kWhite,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
