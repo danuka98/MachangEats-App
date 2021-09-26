@@ -45,7 +45,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                 children: [
                   Container(
                     height: MediaQuery.of(context).size.height / 4.9,
-                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20,left: 15,right: 15),
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20,left: 35,right: 35),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(33),
                       color: profileEle,
@@ -78,7 +78,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                     ),
                   ),
                  Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20,left: 15,right: 15),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20,left: 35,right: 35),
                 height: MediaQuery.of(context).size.height /15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -105,7 +105,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 15,right: 15),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
                 height: MediaQuery.of(context).size.height / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -132,7 +132,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                 ),
               ),
                Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 15,right: 15),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
                 height: MediaQuery.of(context).size.height / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -159,7 +159,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                 ),
               ),
               Container(
-                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 15,right: 15),
+                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
                 height: MediaQuery.of(context).size.height / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -186,7 +186,7 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                 ),
               ),
                Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 15,right: 15),
+                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
                 height: MediaQuery.of(context).size.height / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
