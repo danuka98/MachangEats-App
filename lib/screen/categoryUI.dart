@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uee/constants.dart';
+import 'package:uee/favorite.dart';
 import 'package:uee/pubLocator.dart';
 import 'package:uee/restaurants.dart';
 import 'package:uee/tableOrdering.dart';
@@ -93,6 +94,13 @@ class _ListDetailsState extends State<ListDetails> {
                   );
                 }
                 break;
+                case 2:{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Favorite()),
+                  );
+                }
+                break;
                 case 4:{
                   Navigator.push(
                       context,
@@ -128,6 +136,8 @@ class _ListDetailsState extends State<ListDetails> {
                             Expanded(
                               flex: 2,
                               child: Container(
+                                height: index == 4 ? 60 : 90,
+                                width: index == 4 ? 60 : 90,
                                 margin: EdgeInsets.only(
                                     left: MediaQuery.of(context).size.width / 15),
                                 child: Image.asset(categoryImage[index]),
