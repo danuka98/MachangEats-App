@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uee/beverragesItem.dart';
-import 'package:uee/categoryUI.dart';
-import 'package:uee/constants.dart';
+import 'package:uee/screen/beverragesItem.dart';
+import 'package:uee/screen/categoryUI.dart';
+import 'package:uee/styles/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:uee/favorite.dart';
+import 'package:uee/screen/favorite.dart';
 import 'package:uee/presentation/my_flutter_app_icons.dart';
 
 

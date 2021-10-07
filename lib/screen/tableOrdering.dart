@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uee/categoryUI.dart';
-import 'package:uee/constants.dart';
+import 'package:uee/screen/categoryUI.dart';
+import 'package:uee/styles/constants.dart';
 
 class TableOrderingUI extends StatelessWidget {
   const TableOrderingUI({Key? key}) : super(key: key);

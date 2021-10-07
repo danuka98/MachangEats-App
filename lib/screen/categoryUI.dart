@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uee/constants.dart';
-import 'package:uee/favorite.dart';
-import 'package:uee/pubLocator.dart';
-import 'package:uee/restaurants.dart';
-import 'package:uee/tableOrdering.dart';
+import 'package:uee/styles/constants.dart';
+import 'package:uee/screen/favorite.dart';
+import 'package:uee/screen/pubLocator.dart';
+import 'package:uee/screen/restaurants.dart';
+import 'package:uee/screen/tableOrdering.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'categoryUI.dart';
+import 'screen/categoryUI.dart';
 
 void main() {
   runApp(MyApp());
