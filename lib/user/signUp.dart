@@ -185,7 +185,7 @@ class _SignUpState extends State<SignUp> {
             Radius.circular(20),
           ),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.75,
             width: MediaQuery.of(context).size.width * 0.8,
             decoration: BoxDecoration(
               color: Colors.white,

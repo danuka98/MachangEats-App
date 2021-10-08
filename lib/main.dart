@@ -6,6 +6,7 @@ import 'user/userProfile.dart';
 import 'user/signUp.dart';
 import 'user/forgotPass.dart';
 import 'user/getStarted.dart';
+import 'user/login.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: UserProfile(),
+      home: LoginPage(),
     );
   }
 }
