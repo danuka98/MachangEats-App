@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
 import "signUp.dart";
 import 'forgotPass.dart';
+import 'package:email_validator/email_validator.dart';
 
 
 
@@ -16,7 +17,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  
   late String email, password;
   Widget _buildLogo() {
     return Row(
@@ -40,6 +40,8 @@ class _LoginPageState extends State<LoginPage> {
           setState(() {
             email = value;
           });
+        final bool isValid = EmailValidator.validate(email);
+        print('Email is valid? ' + (isValid ? 'yes' : 'no'));
         },
 
         decoration: InputDecoration(
@@ -105,7 +107,6 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(30.0),
             ),
             onPressed: () {
-
             },
             child: Text(
               "Login",
