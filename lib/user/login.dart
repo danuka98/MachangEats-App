@@ -9,12 +9,14 @@ import 'forgotPass.dart';
 
 
 
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
   late String email, password;
   Widget _buildLogo() {
     return Row(
@@ -39,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             email = value;
           });
         },
+
         decoration: InputDecoration(
             prefixIcon: Icon(
               Icons.email,
