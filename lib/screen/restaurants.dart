@@ -8,6 +8,8 @@ import 'package:uee/screen/categoryUI.dart';
 import 'package:uee/screen/s1/event_screen.dart';
 import 'package:uee/screen/s1/loyalty_screen.dart';
 import 'package:uee/screen/s1/promotion_screen.dart';
+import 'package:uee/screen/s2/alert_dialog.dart';
+import 'package:uee/screen/s2/getStarted.dart';
 import 'package:uee/screen/s2/login.dart';
 import 'package:uee/styles/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -1685,11 +1687,16 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
+                      onTap: () async {
+                        final action = await AlertDialogs.yesCancelDialog(
+                            context, 'Do you want to logout ?');
+                        if (action == DialogsAction.yes) {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => GetStarted()),
+                          );
+                        }
                       },
                       child: Container(
                         margin: EdgeInsets.only(
