@@ -48,7 +48,6 @@ class _FavoriteState extends State<Favorite> {
     }
   ];
 
-
   @override
   Widget build(BuildContext context) {
     widthScale = MediaQuery.of(context).size.width / 207;

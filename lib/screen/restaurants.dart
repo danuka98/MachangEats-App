@@ -5,6 +5,8 @@ import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uee/screen/beverragesItem.dart';
 import 'package:uee/screen/categoryUI.dart';
+import 'package:uee/screen/s1/event_screen.dart';
+import 'package:uee/screen/s1/promotion_screen.dart';
 import 'package:uee/styles/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:uee/screen/favorite.dart';
@@ -107,6 +109,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
           }
         ),
       ),
+
       body: getBody(),
     );
   }
@@ -386,6 +389,280 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
     ),
       ),
       Scaffold(
+        appBar: AppBar(
+          title: Text('Orders'),
+          leading: GestureDetector(
+            child: Icon(Icons.arrow_back_ios),
+          ),
+          elevation: 0,
+          backgroundColor: Color(0xFF363A42),
+        ),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Container(
+                  height: 250,
+                  color: Color(0xFF363A42),
+                ),
+                Container(
+                  color: Color(0xFF363A42),
+                  child: Container(
+                    height: 350,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(17.0),
+              child: Column(
+                children: [
+                  Card(
+                    color: Color(0xFFF28606),
+                    elevation: 8,
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15,10,0,0),
+                              child: Text(
+                                'Sep 5, 2021',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0,15,15,0),
+                              child: Text(
+                                'LKR 7800.00',
+                                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+
+                          ],
+                        ),Padding(
+                          padding: const EdgeInsets.fromLTRB(15,0,0,10),
+                          child: Text(
+                            '7.00 pm',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFF28606),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15,10,0,0),
+                              child: Text(
+                                'Aug 28, 2021',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0,20,15,0),
+                              child: Text(
+                                'LKR 1550.00',
+                                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15,0,0,10),
+                          child: Text(
+                            '2.55 pm',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFFF9F9),
+                      borderRadius: BorderRadius.only(bottomRight: Radius.circular(20), bottomLeft: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8,8,0,0),
+                              child: Text(
+                                'Order# 210828470',
+                                style: TextStyle(fontSize: 18, color: Color(0xFFF28606)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8,8,0,0),
+                          child: Text(
+                            'Completed',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: 50,
+                              child: Text(
+                                "Unit Price LKR",
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(width: 50,),
+                            Container(
+                              width: 50,
+                              margin: EdgeInsets.only(right: 20),
+                              child: Text(
+                                'Sub Total LKR',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              'Kochchi Pork',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              'x 2',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '775.00',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Text(
+                              '1550.00',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          height: 30, color: Colors.red,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Total',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Text(
+                                'LKR 1550.00 ',
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                height: 100,
+                                width: 200,
+                                margin: EdgeInsets.fromLTRB(0,15,0,10),
+                                child: Image.asset('asset/images/water.jpg'),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Machang Pannipitiya',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+                  Card(
+                    color: Color(0xFFF28606),
+                    // shadowColor: Colors.red,
+                    elevation: 8,
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(15,10,0,0),
+                              child: Text(
+                                'Aug 2, 2021',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0,20,15,0),
+                              child: Text(
+                                'LKR 2000.00',
+                                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(15,0,0,10),
+                          child: Text(
+                            '5.00 pm',
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      Scaffold(
         body: SafeArea(
           child: Column(
             children: <Widget>[
@@ -450,7 +727,9 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
                     ),
                     child: ElevatedButton(
                       onPressed: (){
-                        isRestaurant = !isRestaurant;
+                        setState(() {
+                          isRestaurant = true;
+                        });
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -474,7 +753,9 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
                   ),
                   ElevatedButton(
                     onPressed: (){
-                      isItem = !isItem;
+                      setState(() {
+                        isRestaurant = false;
+                      });
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -502,127 +783,14 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
                   children: [
                     ListView.separated(
                       shrinkWrap: true,
-                      itemCount: restaurantDetails.length,
+                      itemCount:  restaurantDetails.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           height: 10,
                         );
                       },
                       itemBuilder: (BuildContext context, int index){
-                        return isRestaurant ? Container(
-                          padding: EdgeInsets.only(
-                            top: heightScale * 20,
-                          ),
-                          height: MediaQuery.of(context).size.height / 8,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width / 15,
-                            vertical: MediaQuery.of(context).size.width * 0.02,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: kOrange,
-                            boxShadow: [
-                              BoxShadow(
-                                color: kDarkGrey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                right: MediaQuery.of(context).size.width / 50),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: kWhiteGrey,
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  child: SizedBox(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: MediaQuery.of(context).size.height * 0.025,
-                                            left: MediaQuery.of(context).size.width / 12,
-                                          ),
-                                          child: Text(
-                                            'Mineral Water (Small)',
-                                            style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            left: MediaQuery.of(context).size.width / 12,
-                                          ),
-                                          child: Text(
-                                            'LKR 35.00',
-                                            style: GoogleFonts.roboto(
-                                              textStyle: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                          height: 35,
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                            children: [
-                                              Container(
-                                                height: 30,
-                                                width: 95,
-                                                decoration: BoxDecoration(
-                                                  color: kOrange,
-                                                  borderRadius: BorderRadius.only(
-                                                    topRight: Radius.circular(25),
-                                                    bottomLeft: Radius.circular(25),
-                                                  ),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    'Add To Cart',
-                                                    style: GoogleFonts.robotoSlab(
-                                                      textStyle: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: kWhite,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              IconButton(
-                                                onPressed: () {},
-                                                icon: Icon(Icons.favorite_border,color: kPink,),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        left: MediaQuery.of(context).size.width / 1.7),
-                                    child: Image.asset('asset/images/water.jpg'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ) : SwipeActionCell(
+                        return isRestaurant ? SwipeActionCell(
                           key: ObjectKey(addCard[index]),
                           trailingActions: <SwipeAction>[
                             SwipeAction(
@@ -812,6 +980,116 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
                               ),
                             ),
                           ),
+                        ) : Container(
+                          height: MediaQuery.of(context).size.height / 8,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.of(context).size.width / 15,
+                            vertical: MediaQuery.of(context).size.width * 0.02,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: kOrange,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                right: MediaQuery.of(context).size.width / 50),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: kWhiteGrey,
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  child: SizedBox(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: MediaQuery.of(context).size.height * 0.025,
+                                            left: MediaQuery.of(context).size.width / 12,
+                                          ),
+                                          child: Text(
+                                            'Mineral Water (Small)',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            left: MediaQuery.of(context).size.width / 12,
+                                          ),
+                                          child: Text(
+                                            'LKR 35.00',
+                                            style: GoogleFonts.roboto(
+                                              textStyle: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          height: 35,
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                height: 30,
+                                                width: 95,
+                                                decoration: BoxDecoration(
+                                                  color: kOrange,
+                                                  borderRadius: BorderRadius.only(
+                                                    topRight: Radius.circular(25),
+                                                    bottomLeft: Radius.circular(25),
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'Add To Cart',
+                                                    style: GoogleFonts.robotoSlab(
+                                                      textStyle: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: kWhite,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              IconButton(
+                                                onPressed: () {},
+                                                icon: Icon(Icons.favorite_border,color: kPink,),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width / 1.7),
+                                    child: Image.asset('asset/images/water.jpg'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         );
                       },
                     ),
@@ -822,6 +1100,209 @@ class _RestaurantsHomeState extends State<RestaurantsHome>{
           ),
         ),
       ),
+      Scaffold(
+        backgroundColor: kDarkGrey,
+        body: Column(
+          children:<Widget> [
+            Container( alignment: Alignment.center,
+                child: Image.asset('asset/images/logo.png',height: 170,width: 170)
+            ),
+            Expanded(
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.001),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        image: DecorationImage(
+                          image: AssetImage('asset/images/back2.png'),
+                          colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(60),
+                          topRight: Radius.circular(60),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height / 4,
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 30,left: 35,right: 35),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(33),
+                            color: kWhiteGrey,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                blurRadius: 3,
+                                offset: Offset(0.0,0.75),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.account_circle,size: 90,color: kOrange,),
+                              //Image.asset('images/google.png',height: 60,width: 60,),
+                              Text('Janitha Tharaka',style: GoogleFonts.roboto(
+                                textStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+                              )),
+                              Text('janitha613@gmail.com',style: GoogleFonts.roboto(
+                                textStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: kDarkGrey.withOpacity(0.5)),
+                              )),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 120,
+                                      ),
+                                      child: Text('0715291618',style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 17,color: kDarkGrey.withOpacity(0.5)),
+                                      )),
+                                    ),
+                                    IconButton(icon:Icon(Icons.edit) ,color: kOrange ,onPressed: () {  },)
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20,left: 35,right: 35),
+                          height: MediaQuery.of(context).size.height /18,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: kWhiteGrey,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                blurRadius: 4,
+                                offset: Offset(0.0,0.75),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(icon:Icon(Icons.favorite) ,color: kOrange ,onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Favorite())
+                                );
+                              },),
+                              Text('Favourite',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color:kDarkGrey.withOpacity(0.5)),)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
+                          height: MediaQuery.of(context).size.height / 18,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: kWhiteGrey,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                blurRadius: 4,
+                                offset: Offset(0.0,0.75),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(icon:Icon(Icons.card_giftcard_outlined) ,color: kOrange ,onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => PromotionScreen())
+                                );
+                              },),
+                              Text('Premotions',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color:kDarkGrey.withOpacity(0.5)),)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
+                          height: MediaQuery.of(context).size.height / 18,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: kWhiteGrey,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                blurRadius: 4,
+                                offset: Offset(0.0,0.75),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(icon:Icon(Icons.event) ,color: kOrange ,onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => EventScreen())
+                                );
+                              },),
+                              Text('Event',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color:kDarkGrey.withOpacity(0.5)),)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
+                          height: MediaQuery.of(context).size.height / 18,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: kWhiteGrey,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                blurRadius: 4,
+                                offset: Offset(0.0,0.75),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(icon:Icon(Icons.loyalty) ,color: kOrange ,onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Favorite())
+                                );
+                              },),
+                              Text('Loyality',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color:kDarkGrey.withOpacity(0.5)),)
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 70,left: 35,right: 35),
+                          height: MediaQuery.of(context).size.height / 18,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: kWhiteGrey,
+                            boxShadow: [
+                              BoxShadow(
+                                color: kDarkGrey.withOpacity(0.5),
+                                blurRadius: 4,
+                                offset: Offset(0.0,0.75),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              IconButton(icon:Icon(Icons.logout) ,color: kOrange ,onPressed: () {  },),
+                              Text('Logout',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color:kDarkGrey.withOpacity(0.5)),)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+            )
+          ],
+        ),
+      )
     ];
     return IndexedStack(
       index: _pageIndex,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uee/screen/s1/event_screen.dart';
+import 'package:uee/screen/s1/loyalty_screen.dart';
+import 'package:uee/screen/s1/promotion_screen.dart';
 import 'package:uee/styles/constants.dart';
 import 'package:uee/screen/favorite.dart';
 import 'package:uee/screen/pubLocator.dart';
@@ -97,7 +100,14 @@ class _ListDetailsState extends State<ListDetails> {
                 case 2:{
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Favorite()),
+                    MaterialPageRoute(builder: (context) => EventScreen()),
+                  );
+                }
+                break;
+                case 3:{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PromotionScreen()),
                   );
                 }
                 break;
@@ -107,6 +117,14 @@ class _ListDetailsState extends State<ListDetails> {
                       MaterialPageRoute(builder: (context) => PubLocator()),
                   );
                 }
+                break;
+                case 5:{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoyaltyScreen()),
+                  );
+                }
+                break;
               }
             },
             child: Container(
