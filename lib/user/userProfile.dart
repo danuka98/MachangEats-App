@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'alert_dialog.dart';
+import 'getStarted.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({ Key? key }) : super(key: key);
@@ -202,9 +204,17 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                 child: Column(
                   children: <Widget>[
                     Container(
+                      
                           child: Row(
                             children: [
-                              IconButton(icon:Icon(Icons.logout) ,color: kOrange ,onPressed: () {  },),
+                              IconButton(icon:Icon(Icons.logout) ,color: kOrange ,onPressed: () async { 
+                                final action = await AlertDialogs.yesCancelDialog(context, 'logout', 'Are You Sure?');
+                                if(action == DialogsAction.yes){
+                                   Navigator.push(context, 
+                                   MaterialPageRoute(builder: (context)=>GetStarted()),);
+                                }
+                                
+                               },),
                               Text('Logout',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
                             ],
                           ),
