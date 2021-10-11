@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uee/services/authserviceLogin.dart';
 import 'constants.dart';
 import "signUp.dart";
 import 'forgotPass.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:uee/services/authserviceLogin.dart';
 
 
 
@@ -17,7 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late String email, password;
+  late String email, password,token;
   Widget _buildLogo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -107,6 +110,21 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: BorderRadius.circular(30.0),
             ),
             onPressed: () {
+              AuthServiceLogin().login(email, password).then((val){
+                if(val.data['success']){
+                  token = val.data['token'];
+                  Fluttertoast.showToast(
+                    msg: 'Authenticated',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+
+                  );
+                }
+              });
             },
             child: Text(
               "Login",
