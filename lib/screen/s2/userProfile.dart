@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uee/screen/s1/loyalty_screen.dart';
 import 'package:uee/screen/s2/login.dart';
 import 'package:uee/styles/constants.dart';
 
@@ -218,42 +219,50 @@ class _UserProfileDetailsState extends State<UserProfileDetails> {
                     ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height / 70,
-                      left: 35,
-                      right: 35),
-                  height: MediaQuery.of(context).size.height / 15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: kWhiteGrey,
-                    boxShadow: [
-                      BoxShadow(
-                        color: kDarkGrey.withOpacity(0.5),
-                        spreadRadius: 4,
-                        blurRadius: 7,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        child: Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.loyalty),
-                              color: kOrange,
-                              onPressed: () {},
-                            ),
-                            Text(
-                              'Loyality',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            )
-                          ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoyaltyScreen()));
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 70,
+                        left: 35,
+                        right: 35),
+                    height: MediaQuery.of(context).size.height / 15,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: kWhiteGrey,
+                      boxShadow: [
+                        BoxShadow(
+                          color: kDarkGrey.withOpacity(0.5),
+                          spreadRadius: 4,
+                          blurRadius: 7,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.loyalty),
+                                color: kOrange,
+                                onPressed: () {},
+                              ),
+                              Text(
+                                'Loyality',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(

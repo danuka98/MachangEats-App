@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:uee/screen/beverragesItem.dart';
 import 'package:uee/screen/categoryUI.dart';
 import 'package:uee/screen/s1/event_screen.dart';
+import 'package:uee/screen/s1/loyalty_screen.dart';
 import 'package:uee/screen/s1/promotion_screen.dart';
 import 'package:uee/screen/s2/login.dart';
 import 'package:uee/styles/constants.dart';
@@ -24,9 +25,10 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
   int _pageIndex = 0;
   //static TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   var addCard = ["1", "2", "3", "4", "5"];
-  late double widthScale, heightScale;
+  late double widthScale, heightScale, height;
   bool isRestaurant = false;
   bool isItem = false;
+  bool isTap = false;
 
   List<Map> restaurantDetails = [
     {
@@ -79,6 +81,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
   Widget build(BuildContext context) {
     widthScale = MediaQuery.of(context).size.width / 207;
     heightScale = MediaQuery.of(context).size.height / 448;
+    height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       extendBody: true,
@@ -472,308 +475,339 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
         ),
       ),
       Scaffold(
+        backgroundColor: kDarkGrey,
         appBar: AppBar(
-          title: Text('Orders'),
-          leading: GestureDetector(
-            child: Icon(Icons.arrow_back_ios),
+          title: Text(
+            'Orders',
+            style: GoogleFonts.roboto(
+              textStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: kWhite,
+              ),
+            ),
           ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CategoryList()));
+            },
+            icon: Icon(Icons.arrow_back_ios_outlined),
+          ),
+          toolbarHeight: 70,
           elevation: 0,
-          backgroundColor: Color(0xFF363A42),
+          backgroundColor: kDarkGrey,
         ),
         body: Stack(
           children: [
-            Column(
-              children: [
-                Container(
-                  height: 250,
-                  color: Color(0xFF363A42),
-                ),
-                Container(
-                  color: Color(0xFF363A42),
-                  child: Container(
-                    height: 350,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(60),
-                            topRight: Radius.circular(60))),
-                  ),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.only(
+                top: heightScale * 100,
+              ),
+              child: Container(
+                height: height,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60)),
+                    image: DecorationImage(
+                      image: AssetImage('asset/images/back2.png'),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                    )),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.all(17.0),
-              child: Column(
-                children: [
-                  Card(
-                    color: Color(0xFFF28606),
-                    elevation: 8,
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-                              child: Text(
-                                'Sep 5, 2021',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+              padding: EdgeInsets.only(
+                top: heightScale * 40,
+                left: widthScale * 10,
+                right: widthScale * 10,
+              ),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: 4,
+                itemBuilder: (BuildContext context, int index) {
+                  return isTap
+                      ? Container(
+                          height: heightScale * 240,
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isTap = !isTap;
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: kOrange,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: heightScale * 5,
+                                      left: widthScale * 8,
+                                      right: widthScale * 8,
+                                      bottom: heightScale * 5,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Aug 28, 2021',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
+                                            ),
+                                            Text(
+                                              '2.55 pm',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          'LKR 1550.00',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 15, 15, 0),
-                              child: Text(
-                                'LKR 7800.00',
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFFFF9F9),
+                                  borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20)),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              8, 8, 0, 0),
+                                          child: Text(
+                                            'Order# 210828470',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: kOrange,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                                      child: Text(
+                                        'Completed',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          width: 50,
+                                          child: Text(
+                                            "Unit Price LKR",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 50,
+                                        ),
+                                        Container(
+                                          width: 50,
+                                          margin: EdgeInsets.only(right: 20),
+                                          child: Text(
+                                            'Sub Total LKR',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w800),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      height: heightScale * 40,
+                                      child: ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: 6,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Text(
+                                                    'Kochchi Pork',
+                                                    style:
+                                                        TextStyle(fontSize: 14),
+                                                  ),
+                                                  Text(
+                                                    'x 2',
+                                                    style:
+                                                        TextStyle(fontSize: 14),
+                                                  ),
+                                                  Text(
+                                                    '775.00',
+                                                    style:
+                                                        TextStyle(fontSize: 14),
+                                                  ),
+                                                  Text(
+                                                    '1550.00',
+                                                    style:
+                                                        TextStyle(fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Divider(
+                                      height: 30,
+                                      color: Colors.red,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 20),
+                                          child: Text(
+                                            'Total',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          child: Text(
+                                            'LKR 1550.00 ',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: heightScale * 20,
+                                        left: widthScale * 10,
+                                        bottom: heightScale * 5,
+                                      ),
+                                      child: Text(
+                                        'Machang Pannipitiya',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 0, 10),
-                          child: Text(
-                            '7.00 pm',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF28606),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-                              child: Text(
-                                'Aug 28, 2021',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isTap = !isTap;
+                            });
+                          },
+                          child: Container(
+                            height: heightScale * 34,
+                            decoration: BoxDecoration(
+                              color: kOrange,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: heightScale * 5,
+                                left: widthScale * 8,
+                                right: widthScale * 8,
+                                bottom: heightScale * 5,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Aug 28, 2021',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
+                                      ),
+                                      Text(
+                                        '2.55 pm',
+                                        style: TextStyle(
+                                            fontSize: 16, color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    'LKR 1550.00',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
-                              child: Text(
-                                'LKR 1550.00',
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 0, 10),
-                          child: Text(
-                            '2.55 pm',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFFF9F9),
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                              child: Text(
-                                'Order# 210828470',
-                                style: TextStyle(
-                                    fontSize: 18, color: Color(0xFFF28606)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                          child: Text(
-                            'Completed',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: 50,
-                              child: Text(
-                                "Unit Price LKR",
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            Container(
-                              width: 50,
-                              margin: EdgeInsets.only(right: 20),
-                              child: Text(
-                                'Sub Total LKR',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              'Kochchi Pork',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              'x 2',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              '775.00',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            Text(
-                              '1550.00',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                        Divider(
-                          height: 30,
-                          color: Colors.red,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                'Total',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Text(
-                                'LKR 1550.00 ',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 200,
-                              margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
-                              child: Image.asset('asset/images/water.jpg'),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Machang Pannipitiya',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Card(
-                    color: Color(0xFFF28606),
-                    // shadowColor: Colors.red,
-                    elevation: 8,
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-                              child: Text(
-                                'Aug 2, 2021',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 20, 15, 0),
-                              child: Text(
-                                'LKR 2000.00',
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 0, 0, 10),
-                          child: Text(
-                            '5.00 pm',
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                        );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 8,
+                  );
+                },
               ),
             ),
           ],
@@ -1197,146 +1231,180 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                   ),
                                 ),
                               )
-                            : Container(
-                                height: MediaQuery.of(context).size.height / 8,
-                                margin: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width / 15,
-                                  vertical:
-                                      MediaQuery.of(context).size.width * 0.02,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: kOrange,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: kDarkGrey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 4,
-                                    ),
-                                  ],
-                                ),
+                            : SwipeActionCell(
+                                key: ObjectKey(addCard[index]),
+                                trailingActions: <SwipeAction>[
+                                  SwipeAction(
+                                      onTap: (CompletionHandler handler) async {
+                                        addCard.removeAt(index);
+                                        setState(() {});
+                                      },
+                                      color: Colors.transparent,
+                                      content: Icon(
+                                        Icons.delete,
+                                        color: kRed,
+                                        size: 40,
+                                      )),
+                                ],
                                 child: Container(
-                                  margin: EdgeInsets.only(
-                                      right: MediaQuery.of(context).size.width /
-                                          50),
+                                  height:
+                                      MediaQuery.of(context).size.height / 8,
+                                  margin: EdgeInsets.symmetric(
+                                    horizontal:
+                                        MediaQuery.of(context).size.width / 15,
+                                    vertical:
+                                        MediaQuery.of(context).size.width *
+                                            0.02,
+                                  ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
-                                    color: kWhiteGrey,
+                                    color: kOrange,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: kDarkGrey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                      ),
+                                    ],
                                   ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        child: SizedBox(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  top: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.025,
-                                                  left: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      12,
-                                                ),
-                                                child: Text(
-                                                  'Mineral Water (Small)',
-                                                  style: GoogleFonts.roboto(
-                                                    textStyle: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.normal,
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                        right:
+                                            MediaQuery.of(context).size.width /
+                                                50),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: kWhiteGrey,
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          child: SizedBox(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: MediaQuery.of(context)
+                                                            .size
+                                                            .height *
+                                                        0.025,
+                                                    left: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        12,
+                                                  ),
+                                                  child: Text(
+                                                    'Mineral Water (Small)',
+                                                    style: GoogleFonts.roboto(
+                                                      textStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      12,
-                                                ),
-                                                child: Text(
-                                                  'LKR 35.00',
-                                                  style: GoogleFonts.roboto(
-                                                    textStyle: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    left: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        12,
+                                                  ),
+                                                  child: Text(
+                                                    'LKR 35.00',
+                                                    style: GoogleFonts.roboto(
+                                                      textStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Spacer(),
-                                              Container(
-                                                height: 35,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    Container(
-                                                      height: 30,
-                                                      width: 95,
-                                                      decoration: BoxDecoration(
-                                                        color: kOrange,
-                                                        borderRadius:
-                                                            BorderRadius.only(
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  25),
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  25),
+                                                Spacer(),
+                                                Container(
+                                                  height: 35,
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      Container(
+                                                        height: 30,
+                                                        width: 95,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: kOrange,
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    25),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    25),
+                                                          ),
+                                                        ),
+                                                        child: Center(
+                                                          child: Text(
+                                                            'Add To Cart',
+                                                            style: GoogleFonts
+                                                                .robotoSlab(
+                                                              textStyle:
+                                                                  TextStyle(
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: kWhite,
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
-                                                      child: Center(
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          left: widthScale * 5,
+                                                        ),
                                                         child: Text(
-                                                          'Add To Cart',
+                                                          'Swipe Right side to delete',
                                                           style: GoogleFonts
-                                                              .robotoSlab(
+                                                              .roboto(
                                                             textStyle:
                                                                 TextStyle(
                                                               fontSize: 12,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .bold,
-                                                              color: kWhite,
+                                                                      .w300,
+                                                              color:
+                                                                  Colors.black,
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                    IconButton(
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.favorite_border,
-                                                        color: kPink,
-                                                      ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.7),
-                                          child: Image.asset(
-                                              'asset/images/water.jpg'),
+                                        Positioned(
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                                left: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.7),
+                                            child: Image.asset(
+                                                'asset/images/water.jpg'),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -1569,43 +1637,51 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 70,
-                          left: 35,
-                          right: 35),
-                      height: MediaQuery.of(context).size.height / 18,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: kWhiteGrey,
-                        boxShadow: [
-                          BoxShadow(
-                            color: kDarkGrey.withOpacity(0.5),
-                            blurRadius: 4,
-                            offset: Offset(0.0, 0.75),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.loyalty),
-                            color: kOrange,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Favorite()));
-                            },
-                          ),
-                          Text(
-                            'Loyality',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: kDarkGrey.withOpacity(0.5)),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoyaltyScreen()));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 70,
+                            left: 35,
+                            right: 35),
+                        height: MediaQuery.of(context).size.height / 18,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: kWhiteGrey,
+                          boxShadow: [
+                            BoxShadow(
+                              color: kDarkGrey.withOpacity(0.5),
+                              blurRadius: 4,
+                              offset: Offset(0.0, 0.75),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.loyalty),
+                              color: kOrange,
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Favorite()));
+                              },
+                            ),
+                            Text(
+                              'Loyality',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: kDarkGrey.withOpacity(0.5)),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     GestureDetector(
