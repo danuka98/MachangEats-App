@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uee/model/restaurant.dart';
 import 'package:uee/screen/beverragesItem.dart';
 import 'package:uee/screen/categoryUI.dart';
 import 'package:uee/screen/s1/event_screen.dart';
@@ -11,10 +14,12 @@ import 'package:uee/screen/s1/promotion_screen.dart';
 import 'package:uee/screen/s2/alert_dialog.dart';
 import 'package:uee/screen/s2/getStarted.dart';
 import 'package:uee/screen/s2/login.dart';
+import 'package:uee/screen/s3/CartBody.dart';
 import 'package:uee/styles/constants.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:uee/screen/favorite.dart';
 import 'package:uee/presentation/my_flutter_app_icons.dart';
+import 'package:http/http.dart' as http;
 
 class RestaurantsHome extends StatefulWidget {
   const RestaurantsHome({Key? key}) : super(key: key);
@@ -31,53 +36,165 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
   bool isRestaurant = false;
   bool isItem = false;
   bool isTap = false;
+  List<Restaurant> restaurant = [];
 
-  List<Map> restaurantDetails = [
+  // List<Map> restaurantDetails = [
+  //   {
+  //     "resName": "Machang Dambulla",
+  //     "resPhone": "066-431-4310",
+  //     "resAddress": "No.34, Mirisgoniyawa Trihgfashdg",
+  //     "resImage": Image.asset(
+  //       ("asset/images/res1.png"),
+  //       width: 140,
+  //       height: 120,
+  //     ),
+  //     "resPickupRange": "28.5km",
+  //   },
+  //   {
+  //     "resName": "Machang Kurunegala",
+  //     "resPhone": "037-222-8520",
+  //     "resAddress": "No.342, Negombo Road, dsadgjhasdajs",
+  //     "resImage": Image.asset(
+  //       ("asset/images/res2.png"),
+  //       width: 140,
+  //       height: 120,
+  //     ),
+  //     "resPickupRange": "40.2km",
+  //   },
+  //   {
+  //     "resName": "Machang Habarana",
+  //     "resPhone": "066-227-0773",
+  //     "resAddress": "Dambulla Road, Habarana",
+  //     "resImage": Image.asset(
+  //       ("asset/images/res3.png"),
+  //       width: 140,
+  //       height: 120,
+  //     ),
+  //     "resPickupRange": "44.7km",
+  //   },
+  //   {
+  //     "resName": "Machang Hedeniya",
+  //     "resPhone": "066-431-4310",
+  //     "resAddress": "No.34, Mirisgoniyawa",
+  //     "resImage": Image.asset(
+  //       ("asset/images/res4.png"),
+  //       width: 140,
+  //       height: 120,
+  //     ),
+  //     "resPickupRange": "28.5km",
+  //   }
+  // ];
+  List<Map> productDetails = [
     {
-      "resName": "Machang Dambulla",
-      "resPhone": "066-431-4310",
-      "resAddress": "No.34, Mirisgoniyawa Trihgfashdg",
-      "resImage": Image.asset(
-        ("asset/images/res1.png"),
+      "itemName": "Mineral Water (Small)",
+      "price": "35.00",
+      "itemImage": Image.asset(
+        ("asset/images/water.jpg"),
         width: 140,
         height: 120,
       ),
-      "resPickupRange": "28.5km",
     },
     {
-      "resName": "Machang Kurunegala",
-      "resPhone": "037-222-8520",
-      "resAddress": "No.342, Negombo Road, dsadgjhasdajs",
-      "resImage": Image.asset(
-        ("asset/images/res2.png"),
+      "itemName": "Mineral Water (Large)",
+      "price": "50.00",
+      "itemImage": Image.asset(
+        ("asset/images/water.jpg"),
         width: 140,
         height: 120,
       ),
-      "resPickupRange": "40.2km",
     },
     {
-      "resName": "Machang Habarana",
-      "resPhone": "066-227-0773",
-      "resAddress": "Dambulla Road, Habarana",
-      "resImage": Image.asset(
-        ("asset/images/res3.png"),
+      "itemName": "Redbull - CAN 250ml",
+      "price": "400.00",
+      "itemImage": Image.asset(
+        ("asset/images/redbull.png"),
         width: 140,
         height: 120,
       ),
-      "resPickupRange": "44.7km",
     },
     {
-      "resName": "Machang Hedeniya",
-      "resPhone": "066-431-4310",
-      "resAddress": "No.34, Mirisgoniyawa",
-      "resImage": Image.asset(
-        ("asset/images/res4.png"),
+      "itemName": "Fanta-Bottel 300ml",
+      "price": "120.00",
+      "itemImage": Image.asset(
+        ("asset/images/fanta.jpeg"),
         width: 140,
         height: 120,
       ),
-      "resPickupRange": "28.5km",
+    },
+    {
+      "itemName": "Coke - Bottle 300ml",
+      "price": "120.00",
+      "itemImage": Image.asset(
+        ("asset/images/coke.jpg"),
+        width: 140,
+        height: 120,
+      ),
     }
   ];
+
+  List<Map> pastOrders = [
+    {
+      "date": "Aug 28 2021",
+      "time": "2.55",
+      "price": "1550.00"
+    },
+    {
+      "date": "Jun 21 2021",
+      "time": "1.48",
+      "price": "2550.00"
+    },
+    {
+      "date": "Oct 15 2021",
+      "time": "12.12",
+      "price": "550.00"
+    },
+    {
+      "date": "Sep 01 2021",
+      "time": "7.00",
+      "price": "1250.00"
+    }
+  ];
+
+  late bool isLoading = false;
+
+  //Fetch details from the API CALL
+  String url = 'https://machaneats.herokuapp.com/api/v1/journey/getRestaurants';
+  Future getRestaurant() async {
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Accept": "application/json",
+        },
+      );
+      //print(response.body);
+      Map<String, dynamic> responseBody = json.decode(response.body);
+      if (response.statusCode == 200) {
+        RestaurantClass detailsClass = RestaurantClass.fromJson(responseBody);
+        print("======================Works=============================");
+        for (int i = 0; i < detailsClass.restaurants.length; i++) {
+          restaurant.add(detailsClass.restaurants[i]);
+          setState(() {
+            isLoading = true;
+          });
+        }
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      print("=================throwing Exception error==================");
+      print("Error: $e");
+      throw Exception("Error On server");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getRestaurant();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +251,19 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
   }
 
   Widget getBody() {
+    var loading = Padding(
+      padding: EdgeInsets.only(
+        bottom: widthScale * 15,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(),
+          Text("Loading.... Please wait"),
+        ],
+      ),
+    );
+
     List<Widget> pages = [
       Scaffold(
         backgroundColor: kDarkGrey,
@@ -173,7 +303,12 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width / 2.5),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CartBody()));
+                      },
                       icon: Image.asset('asset/images/cart.png'),
                     ),
                   ),
@@ -225,14 +360,14 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                     ),
                   ),
                   ListView.separated(
-                    itemCount: restaurantDetails.length,
+                    itemCount: null == restaurant ? 0 : restaurant.length,
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         height: 10,
                       );
                     },
                     itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
+                      return isLoading ? loading : GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
@@ -288,8 +423,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                restaurantDetails[index]
-                                                    ["resName"],
+                                                restaurant[index].restaurantName.toString(),
                                                 style: GoogleFonts.roboto(
                                                   textStyle: TextStyle(
                                                     fontSize: 14,
@@ -319,8 +453,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  restaurantDetails[index]
-                                                      ["resPhone"],
+                                                  restaurant[index].restaurantPhone.toString(),
                                                   style: GoogleFonts.roboto(
                                                     textStyle: TextStyle(
                                                       fontSize: 12,
@@ -364,8 +497,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                   width: 140,
                                                   height: 14,
                                                   child: Text(
-                                                    restaurantDetails[index]
-                                                        ["resAddress"],
+                                                    restaurant[index].restaurantAddress.toString(),
                                                     style: GoogleFonts.roboto(
                                                       textStyle: TextStyle(
                                                         fontSize: 12,
@@ -422,8 +554,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                 child: Center(
                                                   child: Text(
                                                     "Pickup Only \n" +
-                                                        restaurantDetails[index]
-                                                            ["resPickupRange"],
+                                                        restaurant[index].restaurantPickUpRange.toString(),
                                                     style: GoogleFonts.roboto(
                                                       textStyle: TextStyle(
                                                         fontSize: 10,
@@ -456,11 +587,14 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                 Positioned(
                                   child: Container(
                                     margin: EdgeInsets.only(
-                                        left:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        top: 8),
-                                    child: restaurantDetails[index]["resImage"],
+                                        left: MediaQuery.of(context).size.width / 2,
+                                        top: 8
+                                    ),
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(restaurant[index].restaurantLogo.toString())
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -566,14 +700,14 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Aug 28, 2021',
+                                              pastOrders[index]["date"],
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.white),
                                             ),
                                             Text(
-                                              '2.55 pm',
+                                              pastOrders[index]["time"]+' pm',
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.white),
@@ -581,7 +715,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                           ],
                                         ),
                                         Text(
-                                          'LKR 1550.00',
+                                          'LKR ' + pastOrders[index]["price"],
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
@@ -779,21 +913,21 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Aug 28, 2021',
+                                        pastOrders[index]["date"],
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white),
                                       ),
                                       Text(
-                                        '2.55 pm',
+                                        pastOrders[index]["time"] + ' pm',
                                         style: TextStyle(
                                             fontSize: 16, color: Colors.white),
                                       ),
                                     ],
                                   ),
                                   Text(
-                                    'LKR 1550.00',
+                                    'LKR ' + pastOrders[index]["price"],
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -942,7 +1076,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                   children: [
                     ListView.separated(
                       shrinkWrap: true,
-                      itemCount: restaurantDetails.length,
+                      itemCount: isRestaurant ? restaurant.length : productDetails.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           height: 10,
@@ -1017,8 +1151,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                   child: Row(
                                                     children: [
                                                       Text(
-                                                        restaurantDetails[index]
-                                                            ["resName"],
+                                                        restaurant[index].restaurantName.toString(),
                                                         style:
                                                             GoogleFonts.roboto(
                                                           textStyle: TextStyle(
@@ -1051,9 +1184,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                               .end,
                                                       children: <Widget>[
                                                         Text(
-                                                          restaurantDetails[
-                                                                  index]
-                                                              ["resPhone"],
+                                                          restaurant[index].restaurantPhone.toString(),
                                                           style: GoogleFonts
                                                               .roboto(
                                                             textStyle:
@@ -1101,9 +1232,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                           width: 140,
                                                           height: 14,
                                                           child: Text(
-                                                            restaurantDetails[
-                                                                    index]
-                                                                ["resAddress"],
+                                                            restaurant[index].restaurantAddress.toString(),
                                                             style: GoogleFonts
                                                                 .roboto(
                                                               textStyle:
@@ -1171,9 +1300,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                         child: Center(
                                                           child: Text(
                                                             "Pickup Only \n" +
-                                                                restaurantDetails[
-                                                                        index][
-                                                                    "resPickupRange"],
+                                                                restaurant[index].restaurantPickUpRange.toString(),
                                                             style: GoogleFonts
                                                                 .roboto(
                                                               textStyle:
@@ -1224,8 +1351,11 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                         .width /
                                                     2,
                                                 top: 8),
-                                            child: restaurantDetails[index]
-                                                ["resImage"],
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(restaurant[index].restaurantLogo.toString())
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -1298,7 +1428,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                         12,
                                                   ),
                                                   child: Text(
-                                                    'Mineral Water (Small)',
+                                                    productDetails[index]["itemName"],
                                                     style: GoogleFonts.roboto(
                                                       textStyle: TextStyle(
                                                         fontSize: 15,
@@ -1316,7 +1446,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                         12,
                                                   ),
                                                   child: Text(
-                                                    'LKR 35.00',
+                                                    'LKR ' + productDetails[index]["price"],
                                                     style: GoogleFonts.roboto(
                                                       textStyle: TextStyle(
                                                         fontSize: 15,
@@ -1401,8 +1531,7 @@ class _RestaurantsHomeState extends State<RestaurantsHome> {
                                                         .size
                                                         .width /
                                                     1.7),
-                                            child: Image.asset(
-                                                'asset/images/water.jpg'),
+                                            child: productDetails[index]["itemImage"],
                                           ),
                                         ),
                                       ],

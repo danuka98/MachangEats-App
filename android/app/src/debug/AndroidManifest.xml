@@ -7,8 +7,9 @@
 
     <application>
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBugvkHp0vNxC0L_1g5B2OI9Vx3NJsFLlA"/>
+            android:value=""/>
 
     </application>
 <!--    AIzaSyD88lp4VAJQYZUL18JsTl4cQbktfDCNP3o-->
+<!--    AIzaSyBugvkHp0vNxC0L_1g5B2OI9Vx3NJsFLlA-->
 </manifest>
